@@ -5,109 +5,217 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kudzai Chidzodzo AI Exam</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
+        h1{
             text-align: center;
         }
-        form {
-            max-width: 500px;
-            margin: auto;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="number"], input[type="text"],
-        select {
-            width: 100%;
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+     form {
+    max-width: 600px; /* Adjust max-width as needed */
+    margin: 0 auto; /* Center the form */
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap to the next row */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    flex: 1 0 calc(33.33% - 20px); /* Set initial size and allow flex-grow, but don't grow beyond one third of the container width */
+    margin-right: 20px; /* Adjust margin between form groups */
+}
+
+/* Adjust margin-right to 0 for the last form group in each row */
+.form-group:nth-child(3n) {
+    margin-right: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="number"], input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
     </style>
 </head>
 <body>
 
 <h1>Credit Score Prediction </h1>
+<h2 align="center" style="color: cornflowerblue">{{ pred }}</h2>
 
 <form id="ml-form" action="/predict" method="post">
+   <div class="form-group">
+    <label for="month">Month:</label>
+    <input type="number" id="month" name="Month" required>
+</div>
+
+<div class="form-group">
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="Age" required>
+</div>
+
+<div class="form-group">
+    <label for="occupation">Occupation (1-12):</label>
+    <input type="number" id="occupation" name="Occupation" min="1" max="12" required>
+</div>
+
+<div class="form-group">
+    <label for="annual-income">Annual Income:</label>
+    <input type="number" id="annual-income" name="Annual_Income" required>
+</div>
+
+<div class="form-group">
+    <label for="monthly-inhand-salary">Monthly Inhand Salary:</label>
+    <input type="number" id="monthly-inhand-salary" name="Monthly_Inhand_Salary" required>
+</div>
+
+<div class="form-group">
+    <label for="num-bank-accounts">Number of Bank Accounts:</label>
+    <input type="number" id="num-bank-accounts" name="Num_Bank_Accounts" required>
+</div>
+
+<div class="form-group">
+    <label for="num-credit-card">Number of Credit Cards:</label>
+    <input type="number" id="num-credit-card" name="Num_Credit_Card" required>
+</div>
+
+<div class="form-group">
+    <label for="interest-rate">Interest Rate:</label>
+    <input type="number" id="interest-rate" name="Interest_Rate" required>
+</div>
+
+<div class="form-group">
+    <label for="delay-from-due-date">Delay from Due Date:</label>
+    <input type="number" id="delay-from-due-date" name="Delay_from_due_date" required>
+</div>
+
+<div class="form-group">
+    <label for="num-of-delayed-payment">Number of Delayed Payments:</label>
+    <input type="number" id="num-of-delayed-payment" name="Num_of_Delayed_Payment" required>
+</div>
+
+<div class="form-group">
+    <label for="changed-credit-limit">Changed Credit Limit (Number):</label>
+    <input type="number" id="changed-credit-limit" name="Changed_Credit_Limit" required>
+</div>
+
+<div class="form-group">
+    <label for="num-credit-inquiries">Number of Credit Inquiries:</label>
+    <input type="number" id="num-credit-inquiries" name="Num_Credit_Inquiries" required>
+</div>
+
+<div class="form-group">
+    <label for="credit-mix">Credit Mix:</label>
+    <input type="text" id="credit-mix" name="Credit_Mix" required>
+</div>
+
+<div class="form-group">
+    <label for="outstanding-debt">Outstanding Debt:</label>
+    <input type="number" id="outstanding-debt" name="Outstanding_Debt" required>
+</div>
+
+<div class="form-group">
+    <label for="credit-utilization-ratio">Credit Utilization Ratio:</label>
+    <input type="number" id="credit-utilization-ratio" name="Credit_Utilization_Ratio" required>
+</div>
+
+<div class="form-group">
+    <label for="credit-history-age">Credit History Age:</label>
+    <input type="number" id="credit-history-age" name="Credit_History_Age" required>
+</div>
+
+<div class="form-group">
+    <label for="payment-of-min-amount">Payment of Minimum Amount (0,1):</label>
+    <input type="number" id="payment-of-min-amount" name="Payment_of_Min_Amount" min="0" max="1" required>
+</div>
+
+<div class="form-group">
+    <label for="total-emi-per-month">Total EMI per Month:</label>
+    <input type="number" id="total-emi-per-month" name="Total_EMI_per_month" required>
+</div>
+
+<div class="form-group">
+    <label for="amount-invested-monthly">Amount Invested Monthly:</label>
+    <input type="number" id="amount-invested-monthly" name="Amount_invested_monthly" required>
+</div>
+
+<div class="form-group">
+    <label for="payment-behaviour">Payment Behaviour (0-5):</label>
+    <input type="number" id="payment-behaviour" name="Payment_Behaviour" min="0" max="5" required>
+</div>
+
+<div class="form-group">
+    <label for="monthly-balance">Monthly Balance:</label>
+    <input type="number" id="monthly-balance" name="Monthly_Balance" required>
+</div>
+
+
+<div class="form-group">
+    <label for="count-auto-loan">Count Auto Loan (0-1):</label>
+    <input type="number" id="count-auto-loan" name="Count_Auto_Loan" min="0" max="1" required>
+</div>
+
+<div class="form-group">
+    <label for="count-credit-builder-loan">Count Credit-Builder Loan (0-1):</label>
+    <input type="number" id="count-credit-builder-loan" name="Count_Credit-Builder_Loan" min="0" max="1" required>
+</div>
+
+<div class="form-group">
+    <label for="count-personal-loan">Count Personal Loan (0-2):</label>
+    <input type="number" id="count-personal-loan" name="Count_Personal_Loan" min="0" max="2" required>
+</div>
+
+<div class="form-group">
+    <label for="count-home-equity-loan">Count Home Equity Loan (0-2):</label>
+    <input type="number" id="count-home-equity-loan" name="Count_Home_Equity_Loan" min="0" max="2" required>
+</div>
+
+<div class="form-group">
+    <label for="count-not-specified">Count Not Specified (0-2):</label>
+    <input type="number" id="count-not-specified" name="Count_Not_Specified" min="0" max="2" required>
+</div>
+
+<div class="form-group">
+    <label for="count-mortgage-loan">Count Mortgage Loan (0-2):</label>
+    <input type="number" id="count-mortgage-loan" name="Count_Mortgage_Loan" min="0" max="2" required>
+</div>
+
+<div class="form-group">
+    <label for="count-student-loan">Count Student Loan:</label>
+    <input type="number" id="count-student" name="Count_Student" required>
+</div>
     <div class="form-group">
-        <label for="annual-income">Annual Income:</label>
-        <input type="number" id="annual-income" name="Anual Income" required>
-    </div>
+    <label for="count-debt-consolidation-loan">Count Debt Consolidation Loan:</label>
+    <input type="number" id="count-debt-consolidation-loan" name="Count_Debt_Consolidation_Loan" required>
+</div>
     <div class="form-group">
-        <label for="monthly-salary">Monthly Income:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="monthly-salary">Number of Bank Account:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="monthly-salary">Interest Rate:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="monthly-salary">Delayed Due Date:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="monthly-salary">Number of Dely Payment:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="monthly-salary">Outstanding Debt:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="monthly-salary">Monthly Income:</label>
-        <input type="number" id="monthly-salary" name="monthly-salary" required>
-    </div>
-    <div class="form-group">
-        <label for="month">Month :</label>
-        <select id="month" name="month" required>
-            <option value="">Select</option>
-            <option value="Option 1">January</option>
-            <option value="Option 2">February</option>
-            <option value="Option 3">March</option>
-            <option value="Option 3">April</option>
-            <option value="Option 3">May</option>
-            <option value="Option 3">June</option>
-            <option value="Option 3">July</option>
-            <option value="Option 3">August</option>
-            <option value="Option 3">September</option>
-            <option value="Option 3">October</option>
-            <option value="Option 3">November</option>
-            <option value="Option 3">December</option>
-        </select>
-    </div>
-   
+    <label for="count-payday-loan">Count Payday Loan:</label>
+    <input type="number" id="count-payday-loan" name="Count_Payday_Loan" required>
+</div>
 
     <input type="submit" value="Predict">
 </form>
 
+
 </body>
+
 </html>
