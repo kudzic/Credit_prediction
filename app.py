@@ -3,6 +3,9 @@ import numpy as np
 import pickle
 app = Flask(__name__)
 
+
+
+
 model=pickle.load(open('predict.pkl','rb'))
 @app.route('/')
 def hello_world():  # put application's code here
